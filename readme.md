@@ -8,14 +8,14 @@
 
 <ol>
 	<li>
-<code><div class="test-plugin"
+<pre><div class="test-plugin"
 data-image="img/msi.jpg"
 data-image-zoom="img/msi-open.jpg"
-data-size="100"></div></code>
+data-size="100"></div></pre>
 	</li>
 	<li>
-<code>
+<pre>
 $(".test-plugin").magnifierRentgen();
-</code>
+</pre>
 	</li>
 </ol>
