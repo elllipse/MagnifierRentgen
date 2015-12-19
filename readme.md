@@ -8,10 +8,10 @@
 
 <ol>
 	<li>
-<pre><div class="test-plugin"
+<pre>&lt;div class="test-plugin"
 data-image="img/msi.jpg"
 data-image-zoom="img/msi-open.jpg"
-data-size="100"></div></pre>
+data-size="100">&lt;/div&gt;&lt;/pre&gt;
 	</li>
 	<li>
 <pre>
