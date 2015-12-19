@@ -11,7 +11,7 @@
 <pre>&lt;div class="test-plugin"
 data-image="img/msi.jpg"
 data-image-zoom="img/msi-open.jpg"
-data-size="100">&lt;/div&gt;&lt;/pre&gt;
+data-size="100">&lt;/div&gt;</pre>
 	</li>
 	<li>
 <pre>
