@@ -1,67 +1,83 @@
 $.fn.magnifierRentgen = function() {
 
 	return this.each(function() {
+		
+		var $th           = $(this),
+		dataImage     = $th.data("image"),
+		dataImageZoom = $th.data("image-zoom"),
+		dataSize      = $th.data("size");
 
-		var th        = $(this),
-		dataImage     = th.data("image"),
-		dataImageZoom = th.data("image-zoom"),
-		dataSize      = th.data("size");
+		function init() {
+			appendSource();
+			setImageWidth();
+			setLoupeSize();
+			setLoupeImg();
+		};
 
-		th
-		.addClass("magnifierRentgen")
-		.resize(function() {
-			th.find(".data-image, .magnifier-loupe img").css({
-				"width" : th.width()
+		init();
+
+		//EVENTS
+		$th.hover(showLoupe, hideLoupe);
+		$th.mousemove(onLoupeMove);
+		$(window).resize(init);
+
+		//FUNCTIONS
+		function appendSource(magnifierRentgen) {
+			if ( $th.hasClass("magnifierRentgen") ) {return};
+			$th
+			.addClass("magnifierRentgen")
+			.append("<img class='data-image' src='"+dataImage+"'/>"
+				+"<div class='magnifier-loupe'>"
+				+"<img src='"+dataImageZoom+"'/>")
+		}
+
+		function showLoupe() {
+			$th.find(".magnifier-loupe").stop().fadeIn()
+		};
+
+		function hideLoupe() {
+			$th.find(".magnifier-loupe").stop().fadeOut()
+		};
+
+		function setImageWidth() {
+			$th.find(".data-image").css({
+				"width" : $th.width()})
+		};
+		
+		function setLoupeSize() {
+			$th.find(".magnifier-loupe").css({
+				"width"  : dataSize,
+				"height" : dataSize
 			})
-		})
-		.append("
-			<img class='data-image' src='" + dataImage + "'>
-			<div class='magnifier-loupe'>
-				<img src='" + dataImageZoom + "'>
-			")
-			.hover(function() {
-				th.find(".magnifier-loupe").stop().fadeIn()
-			}, function() {
-				th.find(".magnifier-loupe").stop().fadeOut()
-			})
-			.find(".data-image").css({
-				"width" : th.width()
-			}).parent().find(".magnifier-loupe").css({
-					"width"  : dataSize,
-					"height" : dataSize
-				})
-				.find("img").css({
-					"position" : "absolute",
-					"width"    : th.width()
-				});
-
-		th.mousemove(function(e) {
-
+		};
+		function setLoupeImg() {
+			$th.find(".magnifier-loupe img").css({
+				"position" : "absolute",
+				"width" : $th.width()
+			});
+		};
+		
+		function onLoupeMove(e) {
 			var elemPos = {},
-				offset  = th.offset();
+			offset  = $th.offset();
 
 			elemPos = {
-				left : e.pageX - offset.left - dataSize/2,
-				top  : e.pageY - offset.top - dataSize/2
+				left: e.pageX - offset.left - dataSize/2,
+				top: e.pageY - offset.top - dataSize/2,
 			}
 
-			th
+			$th
 			.find(".magnifier-loupe").css({
-					"top"  : elemPos["top"],
-					"left" : elemPos["left"]
-				})
-				.find("img").css({
-					"top"   : -elemPos["top"],
-					"left"  : -elemPos["left"],
-					"width" : th.width()
-				})
-
-		});
-
-		$(window).resize(function() {
-			$(".magnifierRentgen").resize();
-		});
+				"top"  : elemPos.top,
+				"left" : elemPos.left
+			})
+			.find("img").css({
+				"top"   : -elemPos.top,
+				"left"  : -elemPos.left,
+				"width" :  $th.width()
+			})
+		}
 
 	});
 
-};
+}
